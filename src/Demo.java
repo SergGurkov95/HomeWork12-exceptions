@@ -7,18 +7,14 @@ public class Demo {
         boolean missingFile = false;
         StringBuilder stringBuilder = new StringBuilder();
 
-//открываем файл по пути
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(path));
+//используем try с ресурсами для открытия файла по пути
+        try (BufferedReader reader = new BufferedReader(new FileReader(path))){
             String currentString;
 //построчно считываем файл
             while ((currentString = reader.readLine()) != null) {
                 stringBuilder.append(currentString);
                 stringBuilder.append("\n");
             }
-//закрываем файл
-            reader.close();
-
         } catch (IOException exc) {
             missingFile = true;
         } finally {
